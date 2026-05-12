@@ -1,1 +1,79 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🏫 SASL - Sistema de Agendamento de Salas e Laboratórios
+
+Um sistema web prático e eficiente desenvolvido para gerenciar reservas de espaços acadêmicos, garantindo que professores e alunos tenham acesso organizado às salas de aula e laboratórios. Projeto desenvolvido como parte dos requisitos do curso de Informática para Internet do IFAC.
+
+## 🚀 Tecnologias Utilizadas
+
+O projeto foi construído utilizando a arquitetura **MVC** (Model-View-Controller) para garantir um código limpo e organizado, com as seguintes ferramentas:
+
+* **[Laravel](https://laravel.com/)**: Framework PHP robusto para a estruturação do back-end.
+* **[Bootstrap](https://getbootstrap.com/)**: Framework CSS para garantir um front-end ágil, padronizado e responsivo.
+* **[MariaDB](https://mariadb.org/)**: Banco de dados relacional (gerenciado via **XAMPP**).
+
+## ⚙️ Pré-requisitos
+
+Antes de rodar o projeto, você vai precisar das seguintes ferramentas instaladas na sua máquina:
+* [XAMPP](https://www.apachefriends.org/pt_br/index.html) (com Apache e MySQL ativados)
+* [Composer](https://getcomposer.org/) (Gerenciador de dependências do PHP)
+* [Git](https://git-scm.com/)
+
+## 🛠️ Como rodar o projeto localmente
+
+Siga o passo a passo abaixo para rodar o SASL no seu computador:
+
+1.  **Clone o repositório:**
+    ```bash
+    git clone https://github.com/PedroL-Melo/SASL.git
+    ```
+
+2.  **Acesse a pasta do projeto:**
+    ```bash
+    cd SASL
+    ```
+
+3.  **Instale as dependências do Laravel:**
+    ```bash
+    composer install
+    ```
+
+4.  **Configure o ambiente:**
+    * Faça uma cópia do arquivo `.env.example` e renomeie para `.env`.
+    * Abra o arquivo `.env` e configure a conexão com o banco de dados do XAMPP:
+        ```env
+        DB_CONNECTION=mariadb
+        DB_HOST=127.0.0.1
+        DB_PORT=3306
+        DB_DATABASE=sasl_db  # (Lembre-se de criar este banco no phpMyAdmin)
+        DB_USERNAME=root
+        DB_PASSWORD=
+        ```
+
+5.  **Gere a chave de criptografia da aplicação:**
+    ```bash
+    php artisan key:generate
+    ```
+
+6.  **Crie as tabelas no banco de dados:**
+    *Certifique-se de que o Apache e o MySQL estão rodando no painel do XAMPP.*
+    ```bash
+    php artisan migrate
+    ```
+
+7.  **Inicie o servidor local:**
+    ```bash
+    php artisan serve
+    ```
+
+Acesse no seu navegador: `http://localhost:8000`
+
+## 👥 Equipe de Desenvolvimento
+
+Projeto desenvolvido em equipe por:
+* **Pedro Lucas**
+* **Aline Vitória**
+* **Esther Motta**
+* **Ana Letícia**
+* **Vinícius Santos**
+
+---
+⌨️ Desenvolvido com dedicação pela equipe do SAS
