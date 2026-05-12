@@ -74,6 +74,3 @@ Projeto desenvolvido em equipe por:
 * **Esther Motta**
 * **Ana Letícia**
 * **Vinícius Santos**
-
----
-⌨️ Desenvolvido com dedicação pela equipe do SAS
