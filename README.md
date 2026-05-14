@@ -74,3 +74,4 @@ Projeto desenvolvido em equipe por:
 * **Esther Motta**
 * **Ana Letícia**
 * **Vinícius Santos**
+* **Giovanni Santos**
