@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('laboratorios', function (Blueprint $table) {
             $table->id();
+            $table->string('nome', 50);
+            $table->integer('capacidade');
+            $table->string('bloco', 30);
+            $table->integer('piso');
+            $table->string('status_laboratorio', 30);
             $table->timestamps();
         });
     }
