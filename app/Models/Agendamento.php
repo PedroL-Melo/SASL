@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class Agendamento extends Model
-{
+{   
+    protected $table = 'agendamentos';
     protected $fillable = [
         'user_id',
         'sala_id',
@@ -13,6 +14,10 @@ class Agendamento extends Model
         'data_hora_inicio',
         'data_hora_fim',
         'status_agendamento',
+    ];
+    protected $hidden = [
+        'created_at',
+        'updated_at',
     ];
 
     public function user()
