@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('tbl_sala', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->string('nome_sala', 50);
+            $table->string('nome', 50);
             $table->integer('capacidade');
             $table->string('bloco', 30);
-            $table->string('piso', 30);
+            $table->integer('piso');
             $table->string('status_sala', 30);
+            $table->timestamps();
         });
     }
 
