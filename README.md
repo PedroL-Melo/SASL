@@ -7,7 +7,7 @@ Um sistema web prático e eficiente desenvolvido para gerenciar reservas de espa
 O projeto foi construído utilizando a arquitetura **MVC** (Model-View-Controller) para garantir um código limpo e organizado, com as seguintes ferramentas:
 
 * **[Laravel](https://laravel.com/)**: Framework PHP robusto para a estruturação do back-end.
-* **[Bootstrap](https://getbootstrap.com/)**: Framework CSS para garantir um front-end ágil, padronizado e responsivo.
+* **[Tailwind CSS](https://tailwindcss.com/)**: Framework CSS utilitário para garantir um front-end moderno, ágil e responsivo (via Laravel Breeze).
 * **[MariaDB](https://mariadb.org/)**: Banco de dados relacional (gerenciado via **XAMPP**).
 
 ## ⚙️ Pré-requisitos
@@ -15,6 +15,7 @@ O projeto foi construído utilizando a arquitetura **MVC** (Model-View-Controlle
 Antes de rodar o projeto, você vai precisar das seguintes ferramentas instaladas na sua máquina:
 * [XAMPP](https://www.apachefriends.org/pt_br/index.html) (com Apache e MySQL ativados)
 * [Composer](https://getcomposer.org/) (Gerenciador de dependências do PHP)
+* [Node.js e NPM](https://nodejs.org/) (Gerenciador de pacotes do front-end)
 * [Git](https://git-scm.com/)
 
 ## 🛠️ Como rodar o projeto localmente
@@ -31,12 +32,17 @@ Siga o passo a passo abaixo para rodar o SASL no seu computador:
     cd SASL
     ```
 
-3.  **Instale as dependências do Laravel:**
+3.  **Instale as dependências do PHP (Laravel):**
     ```bash
     composer install
     ```
 
-4.  **Configure o ambiente:**
+4.  **Instale as dependências do Front-end (Vite/Tailwind):**
+    ```bash
+    npm install
+    ```
+
+5.  **Configure o ambiente:**
     * Faça uma cópia do arquivo `.env.example` e renomeie para `.env`.
     * Abra o arquivo `.env` e configure a conexão com o banco de dados do XAMPP:
         ```env
@@ -48,18 +54,24 @@ Siga o passo a passo abaixo para rodar o SASL no seu computador:
         DB_PASSWORD=
         ```
 
-5.  **Gere a chave de criptografia da aplicação:**
+6.  **Gere a chave de criptografia da aplicação:**
     ```bash
     php artisan key:generate
     ```
 
-6.  **Crie as tabelas no banco de dados:**
+7.  **Crie as tabelas no banco de dados:**
     *Certifique-se de que o Apache e o MySQL estão rodando no painel do XAMPP.*
     ```bash
     php artisan migrate
     ```
 
-7.  **Inicie o servidor local:**
+8.  **Compile os arquivos de CSS/JavaScript (Front-end):**
+    ```bash
+    npm run build
+    ```
+    *(Para quem for desenvolver e editar o código ao vivo, utilize `npm run dev` em um terminal separado).*
+
+9.  **Inicie o servidor local (Back-end):**
     ```bash
     php artisan serve
     ```
