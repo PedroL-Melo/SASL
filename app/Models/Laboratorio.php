@@ -18,4 +18,9 @@ class Laboratorio extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function agendamentos()
+    {
+        return $this->hasMany(Agendamento::class);
+    }
 }
