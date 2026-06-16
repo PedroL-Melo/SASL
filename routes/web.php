@@ -11,7 +11,9 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $salas = App\Models\Sala::all();
+    $laboratorios = App\Models\Laboratorio::all();
+    return view('dashboard', compact('salas', 'laboratorios'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -19,8 +21,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('salas', SalaController::class);
-    Route::resource('laboratorios', LaboratorioController::class);
+    Route::middleware('isProfessor')->group(function () {
+        Route::resource('salas', SalaController::class);
+        Route::resource('laboratorios', LaboratorioController::class);
+    });
+
     Route::resource('agendamentos', AgendamentoController::class);
 });
 

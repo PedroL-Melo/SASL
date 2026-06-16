@@ -24,7 +24,7 @@ class SalaController extends Controller
             'nome' => 'required|string|max:255',
             'capacidade' => 'required|integer|min:1',
             'bloco' => 'required|string|max:255',
-            'piso' => 'required|string|max:255',
+            'piso' => 'required|integer|min:0',
             'status_sala' => 'required|string|in:disponivel,manutencao,inativo',
         ]);
 
@@ -49,7 +49,7 @@ class SalaController extends Controller
             'nome' => 'required|string|max:255',
             'capacidade' => 'required|integer|min:1',
             'bloco' => 'required|string|max:255',
-            'piso' => 'required|string|max:255',
+            'piso' => 'required|integer|min:0',
             'status_sala' => 'required|string|in:disponivel,manutencao,inativo',
         ]);
 
