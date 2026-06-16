@@ -41,6 +41,10 @@ class AgendamentoController extends Controller
             return back()->withErrors(['error' => 'Selecione uma sala ou um laboratório.'])->withInput();
         }
 
+        if (!empty($validated['sala_id']) && !empty($validated['laboratorio_id'])) {
+            return back()->withErrors(['error' => 'Você não pode agendar uma sala e um laboratório ao mesmo tempo. Selecione apenas um.'])->withInput();
+        }
+
         $validated['user_id'] = Auth::id();
 
         // Checar conflitos de horário com agendamentos já aprovados
@@ -102,6 +106,10 @@ class AgendamentoController extends Controller
 
         if (empty($validated['sala_id']) && empty($validated['laboratorio_id'])) {
             return back()->withErrors(['error' => 'Selecione uma sala ou um laboratório.'])->withInput();
+        }
+
+        if (!empty($validated['sala_id']) && !empty($validated['laboratorio_id'])) {
+            return back()->withErrors(['error' => 'Você não pode agendar uma sala e um laboratório ao mesmo tempo. Selecione apenas um.'])->withInput();
         }
 
         // Se estiver tentando aprovar, verificar conflito com outro aprovado (ignorando este mesmo id)
