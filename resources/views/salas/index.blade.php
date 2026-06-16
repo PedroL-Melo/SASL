@@ -1,4 +1,9 @@
 <x-app-layout>
+  <div class="mb-6 flex space-x-4 border-b border-gray-200">
+    <a href="{{ route('salas.index') }}" class="py-2 px-4 font-bold border-b-2 border-[#76A068] text-gray-800">Salas</a>
+    <a href="{{ route('laboratorios.index') }}" class="py-2 px-4 font-medium text-gray-500 hover:text-gray-800 transition-colors">Laboratórios</a>
+  </div>
+
   <div class="flex justify-between items-center mb-6">
     <h2 class="text-2xl font-bold text-gray-800">Gerenciar Salas</h2>
     <a href="{{ route('salas.create') }}" class="bg-[#76A068] hover:bg-[#608754] text-gray-900 font-bold px-4 py-2 rounded-lg font-medium transition-colors">
