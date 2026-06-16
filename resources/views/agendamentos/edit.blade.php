@@ -1,0 +1,85 @@
+<x-app-layout>
+  <div class="mb-6">
+    <a href="{{ route('agendamentos.index') }}" class="text-gray-500 hover:text-gray-800 text-sm flex items-center gap-1">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+      Voltar para Agendamentos
+    </a>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 max-w-2xl">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">Editar Agendamento</h2>
+
+    <form action="{{ route('agendamentos.update', $agendamento) }}" method="POST" class="space-y-4">
+      @csrf
+      @method('PUT')
+      
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label for="sala_id" class="block text-sm font-medium text-gray-700 mb-1">Sala</label>
+          <select name="sala_id" id="sala_id" class="w-full rounded-lg border-gray-300 focus:border-[#76A068] focus:ring-[#76A068] shadow-sm">
+            <option value="">Selecione uma sala...</option>
+            @foreach($salas as $sala)
+              <option value="{{ $sala->id }}" {{ (old('sala_id', $agendamento->sala_id) == $sala->id) ? 'selected' : '' }}>
+                {{ $sala->nome }} (Capacidade: {{ $sala->capacidade }})
+              </option>
+            @endforeach
+          </select>
+          @error('sala_id') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+        </div>
+        <div>
+          <label for="laboratorio_id" class="block text-sm font-medium text-gray-700 mb-1">Laboratório</label>
+          <select name="laboratorio_id" id="laboratorio_id" class="w-full rounded-lg border-gray-300 focus:border-[#76A068] focus:ring-[#76A068] shadow-sm">
+            <option value="">Selecione um laboratório...</option>
+            @foreach($laboratorios as $lab)
+              <option value="{{ $lab->id }}" {{ (old('laboratorio_id', $agendamento->laboratorio_id) == $lab->id) ? 'selected' : '' }}>
+                {{ $lab->nome }} (Capacidade: {{ $lab->capacidade }})
+              </option>
+            @endforeach
+          </select>
+          @error('laboratorio_id') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+        </div>
+      </div>
+      <p class="text-xs text-gray-500 mt-1">Selecione apenas uma Sala OU um Laboratório.</p>
+
+      <div class="grid grid-cols-2 gap-4 mt-4">
+        <div>
+          <label for="data_hora_inicio" class="block text-sm font-medium text-gray-700 mb-1">Data/Hora de Início</label>
+          <input type="datetime-local" name="data_hora_inicio" id="data_hora_inicio" value="{{ old('data_hora_inicio', date('Y-m-d\TH:i', strtotime($agendamento->data_hora_inicio))) }}" required class="w-full rounded-lg border-gray-300 focus:border-[#76A068] focus:ring-[#76A068] shadow-sm">
+          @error('data_hora_inicio') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+        </div>
+        <div>
+          <label for="data_hora_fim" class="block text-sm font-medium text-gray-700 mb-1">Data/Hora de Fim</label>
+          <input type="datetime-local" name="data_hora_fim" id="data_hora_fim" value="{{ old('data_hora_fim', date('Y-m-d\TH:i', strtotime($agendamento->data_hora_fim))) }}" required class="w-full rounded-lg border-gray-300 focus:border-[#76A068] focus:ring-[#76A068] shadow-sm">
+          @error('data_hora_fim') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+        </div>
+      </div>
+
+      @if(Auth::user()->status_usuario === 'professor')
+      <div class="mt-4">
+        <label for="status_agendamento" class="block text-sm font-medium text-gray-700 mb-1">Status do Agendamento</label>
+        <select name="status_agendamento" id="status_agendamento" required class="w-full rounded-lg border-gray-300 focus:border-[#76A068] focus:ring-[#76A068] shadow-sm">
+          <option value="pendente" {{ old('status_agendamento', $agendamento->status_agendamento) == 'pendente' ? 'selected' : '' }}>Pendente</option>
+          <option value="aprovado" {{ old('status_agendamento', $agendamento->status_agendamento) == 'aprovado' ? 'selected' : '' }}>Aprovado</option>
+          <option value="rejeitado" {{ old('status_agendamento', $agendamento->status_agendamento) == 'rejeitado' ? 'selected' : '' }}>Rejeitado</option>
+          <option value="cancelado" {{ old('status_agendamento', $agendamento->status_agendamento) == 'cancelado' ? 'selected' : '' }}>Cancelado</option>
+        </select>
+      </div>
+      @else
+        <!-- Alunos não podem aprovar/rejeitar, mas se for o próprio agendamento podem cancelar -->
+        <div class="mt-4">
+          <label for="status_agendamento" class="block text-sm font-medium text-gray-700 mb-1">Status do Agendamento</label>
+          <select name="status_agendamento" id="status_agendamento" required class="w-full rounded-lg border-gray-300 focus:border-[#76A068] focus:ring-[#76A068] shadow-sm">
+            <option value="pendente" {{ old('status_agendamento', $agendamento->status_agendamento) == 'pendente' ? 'selected' : '' }}>Pendente</option>
+            <option value="cancelado" {{ old('status_agendamento', $agendamento->status_agendamento) == 'cancelado' ? 'selected' : '' }}>Cancelado</option>
+          </select>
+        </div>
+      @endif
+
+      <div class="pt-4 flex justify-end">
+        <button type="submit" class="bg-[#76A068] hover:bg-[#608754] text-gray-900 font-bold px-6 py-2 rounded-lg transition-colors">
+          Atualizar Agendamento
+        </button>
+      </div>
+    </form>
+  </div>
+</x-app-layout>
