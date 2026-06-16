@@ -9,14 +9,14 @@
   <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 max-w-2xl">
     <h2 class="text-2xl font-bold text-gray-800 mb-6">Editar Agendamento</h2>
 
-    <form action="{{ route('agendamentos.update', $agendamento) }}" method="POST" class="space-y-4">
+    <form action="{{ route('agendamentos.update', $agendamento) }}" method="POST" class="space-y-4" x-data="{ sala: '{{ old('sala_id', $agendamento->sala_id) }}', lab: '{{ old('laboratorio_id', $agendamento->laboratorio_id) }}' }">
       @csrf
       @method('PUT')
       
       <div class="grid grid-cols-2 gap-4">
         <div>
           <label for="sala_id" class="block text-sm font-medium text-gray-700 mb-1">Sala</label>
-          <select name="sala_id" id="sala_id" class="w-full rounded-lg border-gray-300 focus:border-[#76A068] focus:ring-[#76A068] shadow-sm">
+          <select name="sala_id" id="sala_id" x-model="sala" @change="if(sala) lab = ''" class="w-full rounded-lg border-gray-300 focus:border-[#76A068] focus:ring-[#76A068] shadow-sm">
             <option value="">Selecione uma sala...</option>
             @foreach($salas as $sala)
               <option value="{{ $sala->id }}" {{ (old('sala_id', $agendamento->sala_id) == $sala->id) ? 'selected' : '' }}>
@@ -28,7 +28,7 @@
         </div>
         <div>
           <label for="laboratorio_id" class="block text-sm font-medium text-gray-700 mb-1">Laboratório</label>
-          <select name="laboratorio_id" id="laboratorio_id" class="w-full rounded-lg border-gray-300 focus:border-[#76A068] focus:ring-[#76A068] shadow-sm">
+          <select name="laboratorio_id" id="laboratorio_id" x-model="lab" @change="if(lab) sala = ''" class="w-full rounded-lg border-gray-300 focus:border-[#76A068] focus:ring-[#76A068] shadow-sm">
             <option value="">Selecione um laboratório...</option>
             @foreach($laboratorios as $lab)
               <option value="{{ $lab->id }}" {{ (old('laboratorio_id', $agendamento->laboratorio_id) == $lab->id) ? 'selected' : '' }}>
