@@ -99,7 +99,7 @@
           <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center overflow-hidden">
             <svg class="w-5 h-5 text-gray-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
           </div>
-          <span>{{ Auth::user()->name }} ({{ ucfirst(Auth::user()->status_usuario) }})</span>
+          <span>{{ Auth::user()->name }}</span>
         </button>
 
         <div x-show="open" @click.away="open = false" style="display: none;" class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg py-1 z-50">
